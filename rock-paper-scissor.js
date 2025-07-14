@@ -25,7 +25,7 @@ const playRound = (humanChoice, computerChoice) => {
     humanChoice !== "scissor"
   ) {
     alert("Invalid input! Please choose rock, paper, or scissor.");
-    return "Invalid Input!";
+    return "Invalid input!";
   }
 
   if (humanChoice === computerChoice) {
@@ -45,9 +45,16 @@ const playGame = () => {
   let humanScore = 0;
   let computerScore = 0;
   for (let i = 0; i < 5; i++) {
-    const humanChoice = getHumanChoice();
-    const computerChoice = getComputerChoice();
-    const result = playRound(humanChoice, computerChoice);
+    let result;
+    do {
+      const humanChoice = getHumanChoice();
+      const computerChoice = getComputerChoice();
+      result = playRound(humanChoice, computerChoice);
+
+      if (result === "Invalid input!") {
+        alert("Please enter a valid choice to proceed!");
+      }
+    } while (result === "Invalid input!");
 
     alert(`Round ${i + 1}: ${result}`);
 

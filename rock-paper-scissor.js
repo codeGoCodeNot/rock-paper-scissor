@@ -17,7 +17,7 @@ const getHumanChoice = () => {
 };
 
 const playRound = (humanChoice, computerChoice) => {
-  humanChoice = humanChoice.toLowerCase();
+  humanChoice = humanChoice.trim().toLowerCase();
 
   if (
     humanChoice !== "rock" &&
@@ -56,13 +56,14 @@ const playGame = () => {
       }
     } while (result === "Invalid input!");
 
-    alert(`Round ${i + 1}: ${result}`);
-
     if (result === "You win!") {
       humanScore++;
     } else if (result === "Computer wins") {
       computerScore++;
     }
+
+    alert(`Round ${i + 1}: ${result}`);
+    alert(`Score - You: ${humanScore} | Computer: ${computerScore}`);
   }
 
   if (humanScore > computerScore) {

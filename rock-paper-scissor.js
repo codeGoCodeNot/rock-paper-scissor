@@ -11,11 +11,6 @@ const getComputerChoice = () => {
   }
 };
 
-const getHumanChoice = () => {
-  let choice = prompt("Please enter your choice: ");
-  return choice;
-};
-
 const playRound = (humanChoice, computerChoice) => {
   if (humanChoice === computerChoice) {
     return "It's a tie!";
@@ -56,4 +51,12 @@ const updateResult = (roundResult) => {
 
   result.textContent = roundResult;
   score.textContent = `Player Score: ${playerScore} | Computer Score: ${computerScore}`;
+
+  if (playerScore === 5 || computerScore === 5) {
+    const finalWinner = playerScore === 5 ? "Player" : "Computer";
+    result.textContent = `${finalWinner} wins the game!`;
+
+    playerScore = 0;
+    computerScore = 0;
+  }
 };

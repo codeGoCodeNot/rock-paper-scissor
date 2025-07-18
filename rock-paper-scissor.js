@@ -41,38 +41,13 @@ const playRound = (humanChoice, computerChoice) => {
   }
 };
 
-const playGame = () => {
-  let humanScore = 0;
-  let computerScore = 0;
-  for (let i = 0; i < 5; i++) {
-    let result;
-    do {
-      const humanChoice = getHumanChoice();
-      const computerChoice = getComputerChoice();
-      result = playRound(humanChoice, computerChoice);
+const result = document.querySelector("#result");
+const score = document.querySelector("#score");
 
-      if (result === "Invalid input!") {
-        alert("Please enter a valid choice to proceed!");
-      }
-    } while (result === "Invalid input!");
-
-    if (result === "You win!") {
-      humanScore++;
-    } else if (result === "Computer wins") {
-      computerScore++;
-    }
-
-    alert(`Round ${i + 1}: ${result}`);
-    alert(`Score - You: ${humanScore} | Computer: ${computerScore}`);
-  }
-
-  if (humanScore > computerScore) {
-    alert("You win the game!");
-  } else if (computerScore > humanScore) {
-    alert("Computer wins the game!");
-  } else {
-    alert("It's a tie!");
-  }
-};
-
-playGame();
+const buttons = document.querySelectorAll(".button-container button");
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const choice = button.id;
+    console.log("Player Choice:", choice);
+  });
+});

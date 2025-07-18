@@ -30,10 +30,20 @@ const score = document.querySelector("#score");
 
 let playerScore = 0;
 let computerScore = 0;
+let gameOver = false;
 
 const buttons = document.querySelectorAll(".button-container button");
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
+    if (gameOver) {
+      playerScore = 0;
+      computerScore = 0;
+      result.textContent = "";
+      score.textContent = `Player Score: ${playerScore} | Computer Score: ${computerScore}`;
+      gameOver = false;
+      return;
+    }
+
     const humanChoice = button.id;
     const computerChoice = getComputerChoice();
 
@@ -55,8 +65,6 @@ const updateResult = (roundResult) => {
   if (playerScore === 5 || computerScore === 5) {
     const finalWinner = playerScore === 5 ? "Player" : "Computer";
     result.textContent = `${finalWinner} wins the game!`;
-
-    playerScore = 0;
-    computerScore = 0;
+    gameOver = true;
   }
 };

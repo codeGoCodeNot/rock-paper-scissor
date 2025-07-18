@@ -17,17 +17,6 @@ const getHumanChoice = () => {
 };
 
 const playRound = (humanChoice, computerChoice) => {
-  humanChoice = humanChoice.trim().toLowerCase();
-
-  if (
-    humanChoice !== "rock" &&
-    humanChoice !== "paper" &&
-    humanChoice !== "scissor"
-  ) {
-    alert("Invalid input! Please choose rock, paper, or scissor.");
-    return "Invalid input!";
-  }
-
   if (humanChoice === computerChoice) {
     return "It's a tie!";
   } else if (
@@ -44,10 +33,27 @@ const playRound = (humanChoice, computerChoice) => {
 const result = document.querySelector("#result");
 const score = document.querySelector("#score");
 
+let playerScore = 0;
+let computerScore = 0;
+
 const buttons = document.querySelectorAll(".button-container button");
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
-    const choice = button.id;
-    console.log("Player Choice:", choice);
+    const humanChoice = button.id;
+    const computerChoice = getComputerChoice();
+
+    const roundResult = playRound(humanChoice, computerChoice);
+    updateResult(roundResult);
   });
 });
+
+const updateResult = (roundResult) => {
+  if (roundResult === "You win!") {
+    playerScore++;
+  } else if (roundResult === "Computer wins") {
+    computerScore++;
+  }
+
+  result.textContent = roundResult;
+  score.textContent = `Player Score: ${playerScore} | Computer Score: ${computerScore}`;
+};
